@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Home, PlusCircle, PieChart, Settings } from 'lucide-react';
+import { Home, PlusCircle, PieChart, Settings, LogOut } from 'lucide-react';
+import { supabase } from './supabaseClient';
+import Auth from './components/Auth';
 
 function Dashboard() {
   const { t } = useTranslation();
@@ -10,11 +12,30 @@ function Dashboard() {
 
 function App() {
   const { t, i18n } = useTranslation();
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+    });
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+    });
+  }, []);
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'ru' : 'en';
     i18n.changeLanguage(newLang);
   };
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+  };
+
+  if (!session) {
+    return <Auth />;
+  }
 
   return (
     <Router>
@@ -22,12 +43,17 @@ function App() {
         {/* Header */}
         <header className="p-4 flex justify-between items-center bg-gray-800 shadow-md">
           <h1 className="text-xl font-bold font-sans">{t('app_name')}</h1>
-          <button 
-            onClick={toggleLanguage} 
-            className="bg-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-600 transition"
-          >
-            {i18n.language.toUpperCase()}
-          </button>
+          <div className="flex gap-4 items-center">
+            <button 
+              onClick={toggleLanguage} 
+              className="bg-gray-700 px-3 py-1 rounded text-sm hover:bg-gray-600 transition"
+            >
+              {i18n.language.toUpperCase()}
+            </button>
+            <button onClick={handleLogout} className="text-gray-400 hover:text-white">
+              <LogOut size={20} />
+            </button>
+          </div>
         </header>
 
         {/* Main Content Area */}
@@ -40,7 +66,7 @@ function App() {
 
         {/* Bottom Navigation (Mobile Friendly) */}
         <nav className="fixed bottom-0 w-full bg-gray-800 border-t border-gray-700 flex justify-around p-3">
-          <Link to="/" className="flex flex-col items-center text-gray-400 hover:text-white">
+          <Link to="/" className="flex flex-col items-center text-gray-400 hover:text-white focus:text-white">
             <Home size={24} />
             <span className="text-xs mt-1">{t('dashboard')}</span>
           </Link>
