@@ -18,5 +18,9 @@
   "cat_transport": "Transport",
   "cat_rent": "Rent",
   "cat_entertainment": "Entertainment",
-  "cat_other": "Other"
+  "cat_other": "Other",
+  "profile_setup": "Profile Setup",
+  "whats_your_name": "What's your name?",
+  "enter_name": "Enter your name",
+  "save_name": "Save Name"
 }

@@ -18,5 +18,9 @@
   "cat_transport": "Транспорт",
   "cat_rent": "Аренда",
   "cat_entertainment": "Развлечения",
-  "cat_other": "Другое"
+  "cat_other": "Другое",
+  "profile_setup": "Настройка профиля",
+  "whats_your_name": "Как вас зовут?",
+  "enter_name": "Введите ваше имя",
+  "save_name": "Сохранить имя"
 }
