@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Home, PlusCircle, PieChart, Settings, LogOut } from 'lucide-react';
+import { App as CapacitorApp } from '@capacitor/app';
 import { supabase } from './supabaseClient';
 import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
@@ -55,6 +56,15 @@ function App() {
   const [loadingProfile, setLoadingProfile] = useState(true);
 
   useEffect(() => {
+    // Listen for deep links in the compiled Android app
+    CapacitorApp.addListener('appUrlOpen', (event) => {
+      const url = new URL(event.url);
+      if (url.hash && url.hash.includes('access_token')) {
+        // Pass the auth hash to the window so Supabase can automatically parse it
+        window.location.hash = url.hash;
+      }
+    });
+
     // Initial session check
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
