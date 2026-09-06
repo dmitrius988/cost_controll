@@ -4,5 +4,19 @@
   "dashboard": "Панель",
   "add_expense": "Добавить Расход",
   "analytics": "Аналитика",
-  "settings": "Настройки"
+  "settings": "Настройки",
+  "amount": "Сумма",
+  "currency": "Валюта",
+  "category": "Категория",
+  "description": "Описание",
+  "date": "Дата",
+  "save": "Сохранить",
+  "adding": "Сохранение...",
+  "recent_expenses": "Последние расходы",
+  "no_expenses": "Пока нет расходов. Добавьте первый!",
+  "cat_groceries": "Продукты",
+  "cat_transport": "Транспорт",
+  "cat_rent": "Аренда",
+  "cat_entertainment": "Развлечения",
+  "cat_other": "Другое"
 }

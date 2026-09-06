@@ -4,5 +4,19 @@
   "dashboard": "Dashboard",
   "add_expense": "Add Expense",
   "analytics": "Analytics",
-  "settings": "Settings"
+  "settings": "Settings",
+  "amount": "Amount",
+  "currency": "Currency",
+  "category": "Category",
+  "description": "Description",
+  "date": "Date",
+  "save": "Save Expense",
+  "adding": "Saving...",
+  "recent_expenses": "Recent Expenses",
+  "no_expenses": "No expenses yet. Add one!",
+  "cat_groceries": "Groceries",
+  "cat_transport": "Transport",
+  "cat_rent": "Rent",
+  "cat_entertainment": "Entertainment",
+  "cat_other": "Other"
 }
