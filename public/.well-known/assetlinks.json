@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.costcontrol.app",
+    "sha256_cert_fingerprints": [
+      "1B:86:B6:70:A7:C7:C4:95:55:C6:5E:8F:B7:5B:24:E1:D0:83:22:71:A1:96:F7:BA:5C:E4:4D:FC:D8:5F:D6:79"
+    ]
+  }
+}]
