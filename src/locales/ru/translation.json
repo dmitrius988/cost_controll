@@ -22,5 +22,9 @@
   "profile_setup": "Настройка профиля",
   "whats_your_name": "Как вас зовут?",
   "enter_name": "Введите ваше имя",
-  "save_name": "Сохранить имя"
+  "save_name": "Сохранить имя",
+  "spending_by_category": "Расходы по категориям",
+  "spending_by_person": "Расходы по людям",
+  "total_spent": "Всего потрачено",
+  "this_month": "В этом месяце"
 }

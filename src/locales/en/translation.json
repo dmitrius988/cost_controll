@@ -22,5 +22,9 @@
   "profile_setup": "Profile Setup",
   "whats_your_name": "What's your name?",
   "enter_name": "Enter your name",
-  "save_name": "Save Name"
+  "save_name": "Save Name",
+  "spending_by_category": "Spending by Category",
+  "spending_by_person": "Spending by Person",
+  "total_spent": "Total Spent",
+  "this_month": "This Month"
 }

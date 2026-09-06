@@ -7,11 +7,7 @@ import Auth from './components/Auth';
 import Dashboard from './components/Dashboard';
 import AddExpense from './components/AddExpense';
 import ProfileSetup from './components/ProfileSetup';
-
-function Analytics() {
-  const { t } = useTranslation();
-  return <div className="p-4 text-center text-xl">{t('analytics')} (Coming Soon)</div>;
-}
+import Analytics from './components/Analytics';
 
 function SettingsScreen() {
   const { t } = useTranslation();
@@ -110,7 +106,6 @@ function App() {
     return <Auth />;
   }
 
-  // If we are still checking the profile, show a simple loader
   if (loadingProfile) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
@@ -119,7 +114,6 @@ function App() {
     );
   }
 
-  // If the user has no full_name set, force them to the Profile Setup screen
   if (profile && !profile.full_name) {
     return <ProfileSetup session={session} onComplete={() => fetchProfile(session.user.id)} />;
   }
