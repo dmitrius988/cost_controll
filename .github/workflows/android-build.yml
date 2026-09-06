@@ -1,0 +1,49 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch: # Allows you to manually trigger the build
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Web App
+      run: npm run build
+      env:
+        VITE_SUPABASE_URL: "https://rmggnclcqmbplyhjiyal.supabase.co"
+        VITE_SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJtZ2duY2xjcW1icGx5aGppeWFsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2OTc2ODgsImV4cCI6MjEwNDI3MzY4OH0.6P3HbnV8fGbzIxTJmO0K3JPDTjNo9IxcprwJWsPnDXo"
+
+    - name: Sync Capacitor
+      run: npx cap sync android
+
+    - name: Setup Java
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: Grant Execute Permission for Gradle
+      run: chmod +x android/gradlew
+
+    - name: Build APK (Debug)
+      run: cd android && ./gradlew assembleDebug
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: cost-control-app.apk
+        path: android/app/build/outputs/apk/debug/app-debug.apk
