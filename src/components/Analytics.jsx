@@ -76,15 +76,24 @@ export default function Analytics() {
     value: personMap[key]
   }));
 
-  // Calculate Total
-  const totalSpent = expenses.reduce((sum, curr) => sum + Number(curr.amount), 0);
+  // Calculate Totals grouped by currency
+  const totalsByCurrency = expenses.reduce((acc, curr) => {
+    acc[curr.currency] = (acc[curr.currency] || 0) + Number(curr.amount);
+    return acc;
+  }, {});
 
   return (
     <div className="p-4 pb-20 space-y-6">
       <div className="bg-gray-800 p-4 rounded-lg shadow text-center">
         <h2 className="text-gray-400 text-sm font-semibold uppercase">{t('total_spent')} ({t('this_month')})</h2>
-        <div className="text-3xl font-bold text-white mt-1">
-          {totalSpent.toLocaleString()}
+        <div className="text-3xl font-bold text-white mt-1 flex flex-col items-center gap-1">
+          {Object.keys(totalsByCurrency).length > 0 ? (
+            Object.entries(totalsByCurrency).map(([currency, sum]) => (
+              <span key={currency}>{sum.toLocaleString()} {currency}</span>
+            ))
+          ) : (
+            <span>0 UZS</span>
+          )}
         </div>
       </div>
 
