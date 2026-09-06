@@ -35,7 +35,7 @@ export default function Analytics() {
       const { data, error } = await supabase
         .from('expenses')
         .select(`
-          amount, category,
+          amount, currency, category,
           profiles:created_by (full_name)
         `)
         .gte('date', firstDay);
